@@ -14,5 +14,6 @@ for MasterIp in MasterIpList:
 
     pool = redis.ConnectionPool(host = RedisHost, port = RedisPort, db = 0)
     Conn = redis.Redis(connection_pool = pool)
-    for Key in Conn.scan_iter(match='c:60000000000224*', count=100):
-        Conn.delete(Key)
+    for Key in Conn.scan_iter(match='c:50000000001279*', count=100):
+        #Conn.delete(Key)
+        print(Key)
