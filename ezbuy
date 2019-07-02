@@ -1,0 +1,252 @@
+性能查看工具：grafana
+资源查看工具：zabbix
+
+消息队列：disque,rabbitmq,kafka
+
+软件编译，docker：jenkins
+
+发布平台：cmdb
+
+https://www.processon.com/   在线作图工具
+https://docs.google.com/document/u/0/  在线编辑文档
+http://thesecretlivesofdata.com/raft/#home 分布式一致性raft算法动画  Raft Understandable Distributed Consensus
+http://xclient.info/search/s/navicat/?t=afab22706d3b9a4be30601c7989eec7c9902b83d navigate
+
+登录服务，重启某个服务
+sudo docker ps | grep ezorder | awk '{print $1}' | xargs sudo docker restart
+
+
+查看brew安装路径
+brew list mysql
+查看版本mysql -V
+
+brew services start mysql@5.6 
+brew services restart mysql@5.6  #重启
+brew services stop mysql@5.6     #停止
+
+不提交读取
+set session transaction isolation level read uncommitted;
+开启事务
+start transaction;
+提交事务
+commit;
+添加主键
+alter table student add constraint pk_id primary key(id);
+ALTER TABLE table_name ADD PRIMARY KEY (column_list)
+添加自增主键
+alter table student add id int not null auto_increment, add primary key (id);
+
+查看索引
+show index from test;
+查看主键
+show keys from test;
+创建索引
+CREATE INDEX index_name ON table_name (column_list)		index_name=(Primary,secondary)
+ALTER TABLE table_name ADD INDEX index_name (column_list)
+
+查看库大小
+select concat(round(sum(DATA_LENGTH/1024/1024),2),'MB') as data  from TABLES;
+查看制定库大小
+select concat(round(sum(DATA_LENGTH/1024/1024),2),'MB') as data  from TABLES where table_schema='jishi';
+查看指定表大小
+select concat(round(sum(DATA_LENGTH/1024/1024),2),'MB') as data  from TABLES where table_schema='jishi' and table_name='a_ya';
+查看指定库索引大小
+SELECT CONCAT(ROUND(SUM(index_length)/(1024*1024), 2), ' MB') AS 'Total Index Size' FROM TABLES  WHERE table_schema = 'jishi'; 
+查看指定表的索引大小
+SELECT CONCAT(ROUND(SUM(index_length)/(1024*1024), 2), ' MB') AS 'Total Index Size' FROM TABLES  WHERE table_schema = 'test' and table_name='a_yuser'; 
+查看库的情况
+SELECT CONCAT(table_schema,'.',table_name) AS 'Table Name', CONCAT(ROUND(table_rows/1000000,4),'M') AS 'Number of Rows', CONCAT(ROUND(data_length/(1024*1024*1024),4),'G') AS 'Data Size', CONCAT(ROUND(index_length/(1024*1024*1024),4),'G') AS 'Index Size', CONCAT(ROUND((data_length+index_length)/(1024*1024*1024),4),'G') AS'Total'FROM information_schema.TABLES WHERE table_schema LIKE 'test';
+
+
+linux
+
+sudo apt-get install/remove yum
+sudo apt-get install python3.7
+
+sudo easy_install pip
+
+python -V
+
+sudo apt-get install build-essential checkinstall
+sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
+
+cat /proc/version
+uname -r
+uname -a
+
+gcc thread.cpp -o thread -std=c++11 -lstdc++ -pthread
+
+
+
+集群教程
+https://blog.csdn.net/plei_yue/article/details/78791440
+创建集群
+./redis-trib.rb create --replicas 1 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005  127.0.0.1:7006  
+
+cluster-require-full-coverage no    #默认是yes，只要有结点宕机导致16384个槽没全被覆盖，整个集群就全部停止服务，所以一定要改为no
+
+aof和rdb所在目录：/usr/local/var/db/redis
+查看集群
+redis-cli -c -p 7001连接之后
+cluster slots
+cluster nodes
+cluster info
+cluster keyslot key	获取key对应的slot
+cluster countkeysinslot slot 返回slot中key的数量
+cluster getkeysinslot slot count 返回count个slot中的key
+主从切换
+slaveof host port
+
+
+
+
+
+
+gitlab信息如下：
+浏览器地址: gitlab.1dmy.com
+用户名: maoguoping
+密码: AB0coAUNy4qR2STA
+
+多试
+登陆前确认邮件,再登陆
+
+
+ezclone zhantang
+ezhome zhantang
+ezconsul 起服务
+
+ezrun 
+ezclone tong
+ezclone moxiaobei
+
+切换中英文和大小写：键盘设置快捷键 capslock，command＋space
+
+服务器：www.65emall.net
+用户名：65dg
+密码：ezbuyisthebest@1696
+密钥：ezbuy
+
+ls
+ls -a 查看所有文件，包含隐藏文件
+ls -l 查看文件属性
+lsattr
+file
+stat
+pwd:显示当前目录
+cat查看某个文件
+
+command＋shift＋g
+finder 路径拷贝
+https://www.jianshu.com/p/757f9ffc5acf
+
+insert [OrderHistory] ([OrderId],[Notes],[UserId],[CreateBy],[UpdateBy],[CreateDate],[UpdateDate],[NewOrderStatusName],[OldOrderStatusName])
+Values (47491987, N'修复数据到已下单',null,'lyz20180718', 'lyz20180718',GETDATE(),GETDATE(),N'卖家已发货', N'订单采购中’)
+
+/Users/sh-ezbuy-007-009/Projects/ezbuy/goflow/src/gitlab.1dmy.com/ezbuy/vendor/github.com/hashicorp/consul/website/source/intro/getting-started/consul.d/web.json
+ 
+测试环境
+http://192.168.199.120:8080/login用户密码：public ／ ezbuyisthebest
+ 
+
+
+切换分支git checkout -b 82d1d690
+创建一个目录作为git的版本库，repository
+git init:将进入的目录作为git可以管理的仓库
+git add sss:添加需要提交的文件到版本库
+git log|git log --pretty=oneline：查看提交版本号
+git commit -m “评论”:提交到本地仓库＋评论
+git reset —-hard HEAD^:回退到上个版本,HEAD当前版本，HEAD~100往上一百个版本
+git reset —-hard 版本号：回退到某个版本号
+git reflog
+git branch:查看本地分支
+git branch -a:查看远程所有分支
+git branch new branch:创建分支
+git checkout -b 本地分支 origin/远程分支:建立分支
+git checkout —- test.txt:恢复被删除的文件 
+git rm test.txt:git删除某个文件
+git checkout 本地分支：切换本地分支
+git pull:拉取代码，从服务器拉取代码
+git push：上传代码，提交到服务器
+git fetch origin feature/ezOrderCouponCode:feature/ezOrderCouponCode:从服务器拉取代码到本地的feature/ezOrderCouponCode分支
+git status:当前git状态
+git submodule update
+git stash:保存当前分支状态，才能切换分支
+git branch -r -d origin/branch-name:删除远程分支
+git push origin :codMaxJudge :删除远程分支
+
+git diff branch1 branch2 -stat
+
+git clone 
+git push origin feature/activityCommonCouponCode:feature/activityCommonCouponCode：上传代码
+
+--set-upstream-to   或者git branch -u origin/master
+ 
+git diff HEAD -- readme.rtf :查看本地文件和最新版本的区别
+git branch -d <branch_name>
+git config --global —edit：配置git
+当前分支对应目录只有一个，确定好当前进入的分支，代码会做相应改变
+ 
+git显示远程地址
+git remote -v
+git remote show origin
+目录下.git
+设置远程git目录 复制给origin
+git remote set-url origin ssh://git@git.ezbuy.me:10022/65daigou/apidoc.git
+ git push如果发生错误
+首先使用git fetch origin feature/deliveryFeeDiscount:test 将某个分支拉到test
+然后gco  feature/deliveryFeeDiscount
+然后git merge test
+
+
+
+
+
+
+
+monogodb
+
+mongodb结构体查询用.
+
+配置环境
+export MONGO_PATH=/usr/local/mongodb export PATH=$PATH:$MONGO_PATH/bin 启动服务mongod --config /usr/local/etc/mongod.conf
+连接服务mongo
+
+db.customer.find({"login_user" : {"_id":ObjectId("5760e593086659036b77c124"), "email" : "test@bu2trip.com","phone" : "110”}})
+
+获取到满件减活动
+db.getCollection('activity.Activity').find({"Type":"MNCashOffType"})
+获取到活动产品
+db.getCollection('activity.ActivityProducts').find({"ActivityId":"5940f9209297e8b3ec1a3c1f"})
+获取到产品所在活动
+
+
+SECONDARY不允许读写
+rs.slaveOk();
+
+
+
+db.mycol.aggregate([{$group : {_id : "$CustomerId”, num_tutorial : {$sum : 1}}}])
+db.hedwig.UserCartLog.aggregate([{$group:{_id:"$CustomerId",num_tutorial:{$sum:1}}},{$sort:{num_tutorial:-1}}])
+
+db.hedwig.UserCartLog.aggregate([{$match:{CreateDate:{$gte: 1537156800, $lte: 1537164000}}},{$group:{_id:"$CustomerId",num_tutorial:{$sum:1}}},{$sort:{num_tutorial:-1}}])
+
+跳过记录skip(number)
+限制几条limit(number) 
+
+mongo查看hedwig
+mongo --host 192.168.199.171 --port 28000 -udevelop_read -pdevelop_read admin		只读
+mongo --host 192.168.199.171 --port 28000 -umaoguoping -pmaoguoping admin		读写
+查看id
+SELECT TOP 100 CustomerId,CatalogCode FROM dbo.Customer where NickName='gopalmao';		1000152481 sg
+删除item
+db.getCollection('hedwig.UserCartLog').remove({"CustomerId":1000152481})
+
+
+结构体查询
+db.getCollection('hedwig.UserCartLog').find({"ProductInfo.RefId":"ezbuy:305010"})
+db.getCollection('hedwig.UserCartLog').find({"CustomerId":187729,"ProductInfo.RefId":"ezbuy:153619257"})
+
+uat mongo用户名和密码
+192.168.199.171:28000
+user: maoguoping password:maoguoping
+mongo --host 192.168.199.171 --port 28000 -umaoguoping -pmaoguoping admin
